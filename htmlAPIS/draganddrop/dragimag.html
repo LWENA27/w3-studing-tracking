@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drag and Drop Example</title>
+  <style>
+    #div1 {
+      width: 400px;
+      height: 200px;
+      border: 2px dashed #aaa;
+      margin: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    #drag1 {
+      cursor: grab;
+    }
+  </style>
+  <script>
+    function allowDrop(ev) {
+      ev.preventDefault();
+    }
+
+    function drag(ev) {
+      ev.dataTransfer.setData("text", ev.target.id);
+    }
+
+    function drop(ev) {
+      ev.preventDefault();
+      var data = ev.dataTransfer.getData("text");
+      ev.target.appendChild(document.getElementById(data));
+    }
+  </script>
+</head>
+<body>
+
+  <h1>Drag and Drop Example</h1>
+  <p>Drag the image into the box below:</p>
+
+  <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
+    Drop here
+  </div>
+
+  <img id="drag1" src="image/flowers.jpg" draggable="true" ondragstart="drag(event)" width="200" height="100">
+
+</body>
+</html>
